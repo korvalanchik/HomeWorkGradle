@@ -3,7 +3,7 @@ plugins {
 }
 
 group = "org.example"
-version = "1.0-SNAPSHOT"
+version = "1.0.0"
 
 repositories {
     mavenCentral()
@@ -20,8 +20,8 @@ tasks.jar {
     manifest {
         attributes["Main-Class"] = "MyName"
     }
+    from(configurations.compileClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
 }
-
 tasks.test {
     useJUnitPlatform()
 }
